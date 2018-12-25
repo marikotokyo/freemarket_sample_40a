@@ -15,7 +15,9 @@
           .l-left
             .header-nav
               .search-category
-                = link_to "カテゴリーから探す", items_path, class: 'header-nav-root'
+                = link_to "カテゴリーから探す",  categories_path, class: 'header-nav-root'
+
+
               .search-brand
                 = link_to "ブランドから探す", items_path, class: 'header-nav-root'
 
@@ -42,4 +44,3 @@
                   = link_to "ログイン", new_user_session_path, class: 'btn-red'
                 .register-btn
                   = link_to "新規会員登録", choice_users_path, class: 'header-signup'
-
