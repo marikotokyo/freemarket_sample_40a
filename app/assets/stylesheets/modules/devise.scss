@@ -1,8 +1,3 @@
-a{
-  text-decoration: none;
-  color: #fff;;
-}
-
 .single{
   &-container{
     height: 100%;
@@ -218,6 +213,10 @@ a{
   }
   &-sns{
     &-facebook{
+      a{
+        text-decoration: none;
+        color: #fff;;
+      }
       background: #385185;
       color: $white;
       position: relative;
@@ -242,6 +241,10 @@ a{
       }
     }
     &-google{
+      a{
+        text-decoration: none;
+        color: #fff;;
+      }
       margin: 16px 0 0;
       background: #dc4e41;
       color: $white;
@@ -364,3 +367,5 @@ a{
     }
   }
 }
+
+
