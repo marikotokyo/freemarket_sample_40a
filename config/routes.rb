@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     get :logout, on: :member
     get :edit, on: :member
     get :identification, on: :member
-
     resources :cards, :only => [:index, :new, :create, :destroy]
   end
   resources :items
