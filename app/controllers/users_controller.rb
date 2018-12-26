@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     @nickname = user.nickname
   end
 
+  def edit
+    user = User.find(show_params[:id])
+  end
+
   def identification
     @user = User.find(params[:id])
     @address = Address.find_or_initialize_by(id: params[:id])
