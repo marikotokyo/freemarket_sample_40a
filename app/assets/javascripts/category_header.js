@@ -36,7 +36,7 @@ $(document).on('turbolinks:load',function() {
   }
 
   $(document).on('mouseenter','.search-category',function() {
-    $('.top-parent').css('display','');
+    $('.top-parent').css('display','block');
   }).on('mouseleave','.search-category',function(){
     $('.top-parent').css('display','none');
   });

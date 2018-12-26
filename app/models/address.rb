@@ -1,7 +1,10 @@
 class Address < ApplicationRecord
   belongs_to :user
-  validates :postal_code, presence: true
-  validates :prefecture, presence: true
-  validates :city, presence: true
-  validates :street_number, presence: true
+
+  with_options presence: true do
+    validates :postal_code
+    validates :prefecture
+    validates :city
+    validates :street_number
+  end
 end
