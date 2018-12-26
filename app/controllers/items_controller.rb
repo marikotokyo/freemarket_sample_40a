@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   def index
     @items = Item.includes(:user).limit(8)
     @images = Image.includes(:item)
-    @image = @images.find(35)
+    @image = @images.find(60)
   end
 
   def new
@@ -16,6 +16,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+
     if @item.save
       redirect_to items_path
     else
