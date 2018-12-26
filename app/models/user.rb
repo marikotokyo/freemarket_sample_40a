@@ -15,8 +15,9 @@ class User < ApplicationRecord
   validates :birth_month,      presence: true, on: :update
   validates :birth_day,        presence: true, on: :update
 
-  has_many :items
   has_one :address
+  has_many :items
+  has_many :credit_cards
 
   def self.find_for_oauth(auth)
     snscredential = SnsCredential.where(uid: auth.uid, provider: auth.provider).first

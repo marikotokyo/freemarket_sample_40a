@@ -5,12 +5,14 @@ Rails.application.routes.draw do
     get :choice, on: :collection
     post :follow, on: :member
     get :logout, on: :member
-    get :registercard, on: :member
     get :edit, on: :member
     get :identification, on: :member
-end
-
+    resources :cards, :only => [:index, :new, :create, :destroy]
+  end
   resources :items
   resources :orders
-  resources :categories
+  resources :categories do
+    get :select_top, on: :collection
+    get :select_mid, on: :collection
+  end
 end
