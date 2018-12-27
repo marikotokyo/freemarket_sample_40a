@@ -1,0 +1,11 @@
+.category-index
+  .visible-pc
+    %section.category-index-nav
+      .gray
+        %h2
+          カテゴリー一覧
+          .category-list-nav.clearfix
+            = render partial: 'gray', collection: @large_categories, as: "large_category"
+      .category-list-box
+
+

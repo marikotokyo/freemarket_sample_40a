@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   def index
     @items = Item.includes(:user).limit(8)
     @images = Image.includes(:item)
-    @image = @images.find(60)
+    @image = @images.find(1)
   end
 
   def new
@@ -21,6 +21,18 @@ class ItemsController < ApplicationController
     else
       render :action => "new", :layout => "layout_content"
     end
+  end
+
+  def new
+    @item = Item.new
+    @item.images.build
+    render layout: 'layout_content'
+  end
+
+  def create
+    @item = Item.new(item_params)
+    @item.save
+    redirect_to items_path
   end
 
   def show

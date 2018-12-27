@@ -7,9 +7,17 @@ class User < ApplicationRecord
 
   validates :nickname, presence: true, length: { maximum: 12 }
 
+  validates :family_name,      presence: true, on: :update
+  validates :first_name,       presence: true, on: :update
+  validates :family_name_kana, presence: true, on: :update
+  validates :first_name_kana,  presence: true, on: :update
+  validates :birth_year,       presence: true, on: :update
+  validates :birth_month,      presence: true, on: :update
+  validates :birth_day,        presence: true, on: :update
+
+  has_one :address
   has_many :items
   has_many :credit_cards
-
 
   def self.find_for_oauth(auth)
     snscredential = SnsCredential.where(uid: auth.uid, provider: auth.provider).first
