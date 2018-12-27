@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181224045412) do
+ActiveRecord::Schema.define(version: 20181226110826) do
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "postal_code", null: false
@@ -63,10 +63,18 @@ ActiveRecord::Schema.define(version: 20181224045412) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "size"
     t.bigint "category_id"
+    t.bigint "size_id"
     t.index ["category_id"], name: "index_items_on_category_id"
+    t.index ["size_id"], name: "index_items_on_size_id"
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "sizes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false
+    t.string "parent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sns_credentials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -105,6 +113,7 @@ ActiveRecord::Schema.define(version: 20181224045412) do
   add_foreign_key "credit_cards", "users"
   add_foreign_key "images", "items"
   add_foreign_key "items", "categories"
+  add_foreign_key "items", "sizes"
   add_foreign_key "items", "users"
   add_foreign_key "sns_credentials", "users"
 end

@@ -2,6 +2,14 @@
   .new-header
     %h2 商品の情報を入力
 
+  .new-input-error
+    - if @item.errors.any?
+      #error_explanation.alert.alert-danger
+        %ul
+          - @item.errors.full_messages.each do |message|
+            %li
+              = message
+
   .new-upload
     %span
       出品画像
@@ -22,17 +30,6 @@
           またはクリックしてファイルをアップロード
       = f.fields_for :images do |fin|
         = fin.file_field :image, class: 'hidden', required: true
-
-
-
-    - if @item.errors.any?
-      #error_explanation.alert.alert-danger
-        %ul
-          - @item.errors.full_messages.each do |message|
-            %li
-              = message
-
-
 
   .new-itembox
     %span
@@ -56,7 +53,7 @@
 
         = f.collection_select :category, Category.find_by_sql(['select * from categories where depth is NULL']), :id, :name, class: 'select-new', prompt: "---"
 
-      = render partial: "size", locals: { f: f }
+      .new-itembox__right--group.size-hidden
 
       .new-itembox__right--group
         %span
@@ -92,7 +89,7 @@
         = f.select :shipping_from, Item.shipping_froms_i18n.invert, {}, class: 'select-new', placeholder: 0
       .new-itembox__right--group
         %span
-          発送元までの日数
+          発送までの日数
           .require 必須
         = f.select :shipping_date, Item.shipping_dates_i18n.invert, {}, class: 'select-new', placeholder: 0
 

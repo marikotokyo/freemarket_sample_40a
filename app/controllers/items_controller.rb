@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to items_path
     else
-      render :new
+      render :action => "new", :layout => "layout_content"
     end
   end
 
@@ -36,12 +36,13 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.find(params[:id])
   end
 
 
   private
   def item_params
-    params.require(:item).permit(:name, :description, :price, :condition, :size, :category_id, :shipping_from, :shipping_date, :shipping_fee, :shipping_way, images_attributes: [:image]).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :description, :price, :condition, :category_id, :size_id, :shipping_from, :shipping_date, :shipping_fee, :shipping_way, images_attributes: [:image]).merge(user_id: current_user.id)
   end
 
   def move_to_index
