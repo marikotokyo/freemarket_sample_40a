@@ -7,7 +7,7 @@ $(document).on('turbolinks:load',function() {
                   </div>
                   <div class = "category-list-individual-box-inner-box">
                     <p>
-                      <a href = "/category/${id}/"> すべて </a>
+                      <a href = "/categories/${id}/"> すべて </a>
                     </p>
                     <div class = "category-list-individual-box-sub-category-name" data-indexid = ${id}>
                     </div>
@@ -25,14 +25,14 @@ $(document).on('turbolinks:load',function() {
 
   function addGSmall(id,name) {
     var html = `<div class = "category-list-individual-box-sub-sub-category-name" >
-                <p><a href = "category/${id}"> ${name} </p>
+                <p><a href = "/categories/${id}"> ${name} </p>
                 </div>`
     return html;
   }
 
   function addAll(id) {
     var html = `<div class = "category-list-individual-box-sub-sub-category-name" >
-                <p><a href = "category/${id}"> すべて </p>
+                <p><a href = "/categories/${id}"> すべて </p>
                 </div>`
     return html;
   }
