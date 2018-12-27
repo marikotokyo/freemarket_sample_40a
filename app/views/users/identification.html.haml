@@ -30,7 +30,7 @@
             %span.form-require
               必須
             .select-wrap-pre
-              = f.select :prefecture, [["北海道", 0], ["沖縄", 1]], {}, {class: "input-default"}
+              = f.select :prefecture, Item.shipping_froms_i18n.invert, {}, {class: "input-default"}
               %i.fas.fa-angle-down.fa-lg
           .form-group
             = f.label :city, "市区町村"
@@ -54,19 +54,19 @@
           .birth-form
             .birthday-select-wrap
               .select-wrap
-                = f.select :birth_year, [["1990", 0], ["2000", 1]], {}, {class: "input-default"}
+                = f.select :birth_year, @year,{}, {class: "input-default"}
               %i.fas.fa-angle-down.fa-lg
             %span
               年
             .birthday-select-wrap
               .select-wrap.select-wrap__month
-                = f.select :birth_month, [["--", 0], ["9", 1]], {}, {class: "input-default"}
+                = f.select :birth_month, @month, {}, {class: "input-default"}
               %i.fas.fa-angle-down.fa-lg
             %span
               月
             .birthday-select-wrap
               .select-wrap.select-wrap__day
-                = f.select :birth_day, [["--", 0], ["30", 1]], {}, {class: "input-default"}
+                = f.select :birth_day, @day, {}, {class: "input-default"}
               %i.fas.fa-angle-down.fa-lg
             %span
               日

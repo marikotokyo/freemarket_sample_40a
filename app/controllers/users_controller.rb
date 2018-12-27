@@ -21,6 +21,9 @@ class UsersController < ApplicationController
   def identification
     @user = User.find(params[:id])
     @address = Address.find_or_initialize_by(id: params[:id])
+    @year = (1900..2018).to_a.freeze
+    @month = (1..12).to_a.freeze
+    @day = (1..31).to_a.freeze
   end
 
   def update
@@ -32,7 +35,7 @@ class UsersController < ApplicationController
     end
     render :show
     rescue => e
-    render :show
+    render :logout
   end
 
   private

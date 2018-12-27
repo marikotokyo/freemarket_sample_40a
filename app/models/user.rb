@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :birth_month,      presence: true, on: :update
   validates :birth_day,        presence: true, on: :update
 
-  has_one :address
+  has_one  :address
   has_many :items
   has_many :credit_cards
 
