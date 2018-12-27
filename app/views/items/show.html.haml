@@ -176,12 +176,13 @@
     .item-box-head__content
       - 5.times do
         %section.show-items
-          = render 'index'
+          -# = render partial: "items", locals: { item: item }
+          -# = render 'item'
   .items-box-container__in-brands-item
     %h2.item-box-head
       = link_to "ナイキ（スニーカー/メンズ）その他の商品", items_path, class: "another-brand-items"
     .item-box-head__content
       - 5.times do
         %section.show-items
-          = render 'index'
+          -# = render 'item'
 

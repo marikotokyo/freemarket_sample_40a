@@ -4,6 +4,25 @@
   padding: 32px 16px;
   font-weight: bold;
 }
+
+.new-input-error {
+  @include items-new();
+  #error_explanation {
+    padding: 40px;
+    ul {
+      list-style: none;
+      display: block;
+      margin: 0 auto;
+      li {
+        text-align: left;
+        color: $red;
+        line-height: 1.7;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
 .new-upload {
   @include items-new();
   padding: 40px;
