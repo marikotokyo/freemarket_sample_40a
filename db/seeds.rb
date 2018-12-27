@@ -8,3 +8,11 @@ CSV.read("db/category.csv", headers: false).each do |row|
     size_pulldown: row[3],
   )
 end
+
+CSV.read("db/size.csv", headers: false).each do |row|
+  Size.create!(
+    id: row[0],
+    name: row[1],
+    parent: row[2],
+  )
+end
