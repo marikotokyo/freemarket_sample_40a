@@ -15,4 +15,5 @@ Rails.application.routes.draw do
     get :select_top, on: :collection
     get :select_mid, on: :collection
   end
+  resources :sizes, only: :index
 end

@@ -80,90 +80,21 @@ ja:
         w7: "ゆうパック"
         w8: "クリックポスト"
         w9: "ゆうパケット"
-      size:
-        s0: "---"
-        s1: "XXS以下"
-        s2: "XS(SS)"
-        s3: "S"
-        s4: "M"
-        s5: "L"
-        s6: "XL(LL)"
-        s7: "2XL(3L)"
-        s8: "3XL(4L)"
-        s9: "4XL(5L)以上"
-        s10: "FREE SIZE"
-        s11: "20cm以下"
-        s12: "20.5cm"
-        s13: "21cm"
-        s14: "21.5cm"
-        s15: "22cm"
-        s16: "22.5cm"
-        s17: "23cm"
-        s18: "23.5cm"
-        s19: "23.5cm以下"
-        s20: "24cm"
-        s21: "24.5cm"
-        s22: "25cm"
-        s23: "25.5cm"
-        s24: "26cm"
-        s25: "26.5cm"
-        s25: "27cm"
-        s26: "27.5cm"
-        s27: "28cm"
-        s28: "28.5cm"
-        s29: "29cm"
-        s30: "29.5cm"
-        s31: "30cm"
-        s32: "30.5cm"
-        s33: "31cm"
-        s34: "12インチ"
-        s35: "13インチ"
-        s36: "14インチ"
-        s37: "15インチ"
-        s38: "16インチ"
-        s39: "17インチ"
-        s40: "18インチ"
-        s41: "19インチ"
-        s42: "20インチ"
-        s43: "21インチ"
-        s44: "22インチ"
-        s45: "23インチ"
-        s46: "24インチ"
-        s47: "60cm"
-        s48: "70cm"
-        s49: "80cm"
-        s50: "90cm"
-        s51: "95cm"
-        s52: "100cm"
-        s53: "110cm"
-        s54: "120cm"
-        s55: "130cm"
-        s56: "140cm"
-        s57: "150cm"
-        s58: "160cm"
-        s59: "10.5cm以下"
-        s60: "11cm・11.5cm"
-        s61: "12cm・12.5cm"
-        s62: "13cm・13.5cm"
-        s63: "14cm・14.5cm"
-        s64: "15cm・15.5cm"
-        s65: "16cm・16.5cm"
-        s66: "17cm以上"
-        s67: "140cm〜"
-        s68: "150cm〜"
-        s69: "160cm〜"
-        s70: "170cm〜"
-        s71: "スキーボード"
-        s72: "子供用"
-        s73: "その他"
-        s74: "135cm-140cm未満"
-        s75: "140cm-145cm未満"
-        s76: "145cm-150cm未満"
-        s77: "150cm-155cm未満"
-        s78: "155cm-160cm未満"
-        s79: "160cm-165cm未満"
-        s80: "165cm-170cm未満"
   activerecord:
+    models:
+      item: "商品"
+    attributes:
+      item:
+        name:  "商品名"
+        price: "値段"
+        description: "商品の説明"
+        category_id: "カテゴリー"
+        condition: "商品の状態"
+        size_id: "サイズ"
+        shipping_way: "配送の方法"
+        shipping_from: "発送元の地域"
+        shipping_fee: "配送料の負担"
+        shipping_date: "発送までの日数"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
@@ -279,7 +210,7 @@ ja:
       empty: を入力してください
       equal_to: は%{count}にしてください
       even: は偶数にしてください
-      exclusion: は予約されています
+      exclusion: は必須項目です
       greater_than: は%{count}より大きい値にしてください
       greater_than_or_equal_to: は%{count}以上の値にしてください
       inclusion: は一覧にありません
@@ -368,23 +299,3 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
