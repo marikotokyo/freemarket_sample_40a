@@ -82,10 +82,10 @@ ja:
         w9: "ゆうパケット"
   activerecord:
     models:
-      item: "商品"
+      item: "商品222"
     attributes:
       item:
-        name:  "商品名@"
+        name:  "商品名"
         price: "値段"
         description: "商品の説明"
         category_id: "カテゴリー"
