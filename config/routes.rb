@@ -8,9 +8,10 @@ Rails.application.routes.draw do
     get :edit, on: :member
     get :identification, on: :member
     resources :cards, :only => [:index, :new, :create, :destroy]
+    resources :orders, only: :index
   end
   resources :items
-  resources :orders
+  resources :orders, only: :new
   resources :categories do
     get :select_top, on: :collection
     get :select_mid, on: :collection

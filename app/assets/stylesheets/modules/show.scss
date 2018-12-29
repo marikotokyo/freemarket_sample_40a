@@ -21,7 +21,7 @@
         color: #888;
       }
     }
-    .item-name {
+    li:last-child {
       font-weight: 600;
       text-overflow: ellipsis;
     }

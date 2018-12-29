@@ -97,12 +97,12 @@
     }
   }
   &-tab-container-notification-todo{
-    margin: 0;
+    margin-bottom: 40px;
     background: $white
   }
   &-tab{
     &-container{
-      margin: 40px 0 0;
+      margin-bottom: 40px;
       background: $white;
     }
     &-head{
@@ -198,7 +198,7 @@
       padding: 160px 0 60px;
       background: url(https://uploader.xzy.pw/upload/20181217124022_381cd22f_5648797661.png);
       background-repeat: no-repeat;
-      background-size:contain;
+      background-size: contain;
       text-align: center;
       font-size: 16px;
       color: $slv;

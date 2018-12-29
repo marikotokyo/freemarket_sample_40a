@@ -1,0 +1,36 @@
+%nav.bread-crumbs
+  %ul
+    %li
+      = link_to items_path, itemprop: 'url', class: "parent" do
+        %span{itemprop: :"title"} メルカリ
+      %i.fas.fa-angle-right
+    %li
+      = link_to user_path(current_user.id), itemprop: 'url', class: "parent" do
+        %span{itemprop: :"title"} マイページ
+      %i.fas.fa-angle-right
+    %li
+      = link_to user_path(current_user.id), itemprop: 'url', class: "parent" do
+        %span{itemprop: :"title"} 購入した商品 - 取引中
+
+%main.l-container
+  = render "users/sidebar"
+  .l-contents
+    %section.mypage-tab-container
+      %h2.mypage-tab-head
+        購入した商品
+      %ul.mypage-tabs
+        %li.mypage-tabs-active.active
+          %h3
+            =link_to "取引中","#mypage-tab-transaction-now",data: { toggle: 'tab'}
+        %li
+          %h3
+            =link_to "過去の取引","#mypage-tab-transaction-old",data: { toggle: "tab"}
+      .tab-content
+        %ul#mypage-tab-transaction-now.mypage-item-list.tab-pane.move-show
+          %li.mypage-item-not-found.bold
+            取引中の商品がありません
+        %ul#mypage-tab-transaction-old.mypage-item-list.tab-pane
+          %li.mypage-item-not-found.bold
+            過去に取引した商品がありません
+
+
