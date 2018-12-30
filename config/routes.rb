@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :orders, only: :index
   end
   resources :items do
-    resources :orders, only: [:new, :create, :show]
+    resources :orders, only: [:new, :create, :show, :update]
   end
   resources :categories do
     get :select_top, on: :collection
