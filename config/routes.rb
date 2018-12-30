@@ -10,8 +10,9 @@ Rails.application.routes.draw do
     resources :cards, :only => [:index, :new, :create, :destroy]
     resources :orders, only: :index
   end
-  resources :items
-  resources :orders, only: :new
+  resources :items do
+    resources :orders, only: [:new, :create, :show]
+  end
   resources :categories do
     get :select_top, on: :collection
     get :select_mid, on: :collection

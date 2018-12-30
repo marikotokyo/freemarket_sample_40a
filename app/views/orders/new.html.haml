@@ -5,27 +5,31 @@
     .buy-main-content__image
       = image_tag "img.jpeg", alt: "sample", class: "chanel-img"
       .buy-main-content
-        .buy-main-content__name CHANEL シャネル リップ 口紅
+        .buy-main-content__name
+          = @item.name
         .buy-main-content__price
           %ul
-            %li.product-price ¥10,000
+            %li.product-price
+              = @item.price
             %li.shipping-fee 送料込み
         .buy-main-content__point
           .buy-main-content__point-msg ポイントはありません
         .buy-main-content__payment
           %ul
             %li.payment-msg 支払い金額
-            %li.payment-price ¥10,000
+            %li.payment-price
+              = @item.price
         .buy-main-content__error-text 配送先と支払い方法の入力を完了してください
         .buy-main-content__process
-          =link_to items_path, class: "buy-main-content__process-msg" do
+          =link_to item_orders_path(params[:item_id]),method: :post, class: "buy-main-content__process-msg" do
             購入する
       .buy-user-info
         .buy-user-info__inner
           .buy-user-info__inner__msg 配送先
           .buy-user-info__inner__postalcode 〒123-4567
           .buy-user-info__inner__address 東京都渋谷区道玄坂1-1-1
-          .buy-user-info__inner__name 山田花子
+          .buy-user-info__inner__name
+            = current_user.nickname
           = link_to do
             .buy-user-info__inner__fix 変更する >
         .payment-options

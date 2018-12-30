@@ -6,3 +6,33 @@
       %i.fas.fa-angle-right
     %li.item-name
       %span{itemprop: :"title"} うさぎ
+
+.order-main-container
+  .order-main-container__menu
+    ただいま取引中です
+    %span.order-menu__list
+      状態は
+      = @order.status.i18n
+  .order-main-container__menu
+    商品名
+    %span.order-menu__list
+      = @order.item.name
+  .order-main-container__menu
+    値段
+    %span.order-menu__list
+      = @order.item.price
+  .order-main-container__menu
+    出品者
+    %span.order-menu__list
+      = @order.item.user.nickname
+  .order-main-container__menu
+    購入者
+    %span.order-menu__list
+      = current_user.nickname
+
+  .order-item__pay-btn
+    =link_to item_order_path(params[:item_id]), class: "order-item__pay-btn__do" do
+      入金した
+    =link_to item_order_path(params[:item_id]), class: "order-item__pay-btn__do" do
+      入金した
+
