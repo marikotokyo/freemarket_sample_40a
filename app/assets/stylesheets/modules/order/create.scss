@@ -1,27 +1,30 @@
 .order-main-container {
   width: 700px;
-  margin: 0 auto;
+  margin: 50px auto;
   &__menu {
     background-color: $white;
     margin-bottom: 2px;
     text-align: center;
     line-height: 20px;
     vertical-align: middle;
-    font-weight: bold;
+    span {
+      font-weight: bold;
+    }
     .order-menu__list {
-      line-height: 20px;
-      vertical-align: middle;
-      text-align: center;
+      font-size: 16px;
     }
   }
   .order-item__pay-btn {
-    &__do {
-      text-decoration: none;
-      width: 500px;
+    &__box {
       line-height: 50px;
       vertical-align: middle;
-      @include link($white);
       background-color: $red;
+      width: 50%;
+      text-align: center;
+      margin: 20px auto;
+      &__do {
+        @include link($white);
+      }
     }
   }
 }
