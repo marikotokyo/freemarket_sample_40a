@@ -31,7 +31,16 @@
       = current_user.nickname
 
   .order-item__pay-btn
-    .order-item__pay-btn__box
-      =link_to item_order_path(params[:item_id],params[:id]), method: :patch, class: "order-item__pay-btn__box__do" do
+    =link_to item_order_path(params[:item_id],params[:id]), method: :patch, class: "order-item__pay-btn__box__do" do
+      .order-item__pay-btn__box
         = @btn
+
+  .order-item__pay-btn
+    .order-item__pay-btn__message
+      = @message
+
+  .order-item__pay-btn
+    =link_to item_order_path(params[:item_id],params[:id]), method: :delete, class: "order-item__pay-btn__box__do" do
+      .order-item__pay-btn__box
+        消す
 

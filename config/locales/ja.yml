@@ -82,11 +82,11 @@ ja:
         w9: "ゆうパケット"
     order:
       status:
-        stage0: "入金待ち"
-        stage1: "発送待ち"
-        stage2: "到着待ち"
-        stage3: "評価待ち"
-        stage4: "出品者の評価を持って終了"
+        stage0: "購入者の入金待ち"
+        stage1: "出品者の発送待ち"
+        stage2: "到着&購入者の評価待ち"
+        stage3: "出品者の評価待ち"
+        stage4: "取引終了"
   activerecord:
     models:
       item: "商品"

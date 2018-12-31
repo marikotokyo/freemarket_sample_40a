@@ -26,5 +26,13 @@
         @include link($white);
       }
     }
+    &__message {
+      line-height: 50px;
+      vertical-align: middle;
+      background-color: $slv;
+      width: 50%;
+      text-align: center;
+      margin: 20px auto;
+    }
   }
 }

@@ -1,0 +1,44 @@
+.mypage-order-item {
+  width: 700px;
+  padding: 16px;
+  box-sizing: border-box;
+  @include clearfix();
+  .mypage-order-link {
+    color: $black;
+    &__pic {
+      width: 48px;
+      height: 48px;
+      margin-right: 20px;
+      float: left;
+      .order-link-img {
+        width: 48px;
+        height: 48px;
+        object-fit: cover;
+      }
+    }
+    &__body {
+      width: calc(100% - 85px);
+      float: left;
+      .order-message {
+        font-size: 14px;
+      }
+      .order-status {
+        font-size: 12px;
+        font-weight: bold;
+        background-color: #888;
+        color: $white;
+        padding: 5px 6px;
+        margin-top: 8px;
+        border-radius: 2px;
+        display: inline-block;
+      }
+    }
+    .order-icon {
+      font-size: 20px;
+      line-height: 48px;
+      width: 15px;
+      vertical-align: middle;
+      float: right;
+    }
+  }
+}

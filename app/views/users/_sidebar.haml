@@ -34,7 +34,7 @@
           出品した商品・売却済み
           %i.far.fa-angle-rig.fa-lg
       %li
-        = link_to "", class: "mypage-nav-list-item" do
+        = link_to user_orders_path(current_user), class: "mypage-nav-list-item" do
           購入した商品・取引中
           %i.far.fa-angle-rig.fa-lg
       %li

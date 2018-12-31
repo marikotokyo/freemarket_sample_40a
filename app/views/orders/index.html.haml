@@ -27,6 +27,8 @@
             =link_to "過去の取引","#mypage-tab-transaction-old",data: { toggle: "tab"}
       .tab-content
         %ul#mypage-tab-transaction-now.mypage-item-list.tab-pane.move-show
+          = render @orders
+        - if @orders.length == 0
           %li.mypage-item-not-found.bold
             取引中の商品がありません
         %ul#mypage-tab-transaction-old.mypage-item-list.tab-pane
