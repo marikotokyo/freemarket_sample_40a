@@ -1,12 +1,15 @@
 %li.mypage-order-item
   =link_to item_order_path(order.item_id, order.id), class: "mypage-order-link" do
     .mypage-order-link__pic
-      = image_tag "img.jpeg", alt: "sample", class: "order-link-img"
+      = image_tag (order.item.images.first.image.url), alt: "sample", class: "order-link-img"
     .mypage-order-link__body
-      .order-message
-        「
-        = order.item.name
-        」を購入しました。取引中です。
+      - case controller.action_name
+      - when "index"
+        .order-message
+        「#{order.item.name}」を購入しました。取引中です。
+      - when "sale"
+        .order-message
+          = order.item.name
       .order-status
         取引中
     = fa_icon 'angle-right', class: "order-icon"

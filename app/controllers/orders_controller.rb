@@ -2,6 +2,10 @@ class OrdersController < ApplicationController
   before_action :move_to_root
 
   def index
+    # item = Item.includes(:user)
+    # order = Order.includes(:user)
+    # @orders = Order.where("item.user_id = ?", current_user.id).order("created_at DESC")
+    # @orders = Order.where("current_user.id = ?", order.user_id).order("created_at DESC")
     @orders = current_user.orders.order("created_at DESC")
   end
 
@@ -46,6 +50,12 @@ class OrdersController < ApplicationController
     redirect_to root_path
   end
 
+  def sale
+    items = Item.where(user_id: current_user.id)
+    items_ids = items.pluck(:id)
+    @orders = Order.where(item_id: items_ids)
+    # @orders = current_user.orders.order("created_at DESC")
+  end
 
   private
   def move_to_root

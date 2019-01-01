@@ -9,14 +9,14 @@
         %span{itemprop: :"title"} マイページ
       %i.fas.fa-angle-right
     %li
-      %span{itemprop: :"title"} 購入した商品 - 取引中
+      %span{itemprop: :"title"} 出品した商品 - 取引中
 
 %main.l-container
   = render "users/sidebar"
   .l-contents
     %section.mypage-tab-container
       %h2.mypage-tab-head
-        購入した商品
+        出品した商品
       %ul.mypage-tabs
         %li.mypage-tabs-active.active
           %h3
@@ -33,5 +33,3 @@
         %ul#mypage-tab-transaction-old.mypage-item-list.tab-pane
           %li.mypage-item-not-found.bold
             過去に取引した商品がありません
-
-

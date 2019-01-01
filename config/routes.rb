@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     get :edit, on: :member
     get :identification, on: :member
     resources :cards, :only => [:index, :new, :create, :destroy]
-    resources :orders, only: :index
+    resources :orders, only: :index do
+      get :sale, on: :collection
+    end
   end
   resources :items do
     resources :orders, only: [:new, :create, :show, :update, :destroy]
