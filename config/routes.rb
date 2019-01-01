@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :cards, :only => [:index, :new, :create, :destroy]
     resources :orders, only: :index do
       get :sale, on: :collection
+      post :pay, on: :member
     end
   end
   resources :items do

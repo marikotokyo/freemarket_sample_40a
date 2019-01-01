@@ -1,11 +1,9 @@
+require 'payjp'
+
 class OrdersController < ApplicationController
   before_action :move_to_root
 
-  def index
-    # item = Item.includes(:user)
-    # order = Order.includes(:user)
-    # @orders = Order.where("item.user_id = ?", current_user.id).order("created_at DESC")
-    # @orders = Order.where("current_user.id = ?", order.user_id).order("created_at DESC")
+  def index # 買手から見たオーダーリスト
     @orders = current_user.orders.order("created_at DESC")
   end
 
@@ -50,12 +48,39 @@ class OrdersController < ApplicationController
     redirect_to root_path
   end
 
-  def sale
+  def sale # 売手から見たオーダーリスト
     items = Item.where(user_id: current_user.id)
     items_ids = items.pluck(:id)
     @orders = Order.where(item_id: items_ids)
-    # @orders = current_user.orders.order("created_at DESC")
   end
+
+
+
+def pay
+  Payjp.api_key = "sk_test_c62fade9d045b54cd76d7036"
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   private
   def move_to_root
