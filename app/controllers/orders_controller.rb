@@ -1,7 +1,5 @@
-require 'payjp'
-
 class OrdersController < ApplicationController
-  before_action :move_to_root
+  before_action :move_to_choice
 
   def index # 買手から見たオーダーリスト
     @orders = current_user.orders.order("created_at DESC")
@@ -9,11 +7,16 @@ class OrdersController < ApplicationController
 
   def new
     @item = Item.find(params[:item_id])
-    render layout: 'layout_content'
+    if current_user != @item.user
+      render layout: 'layout_content'
+    else
+      redirect_to item_path(params[:item_id])
+    end
   end
 
   def create
-    @order = Order.create(order_params)
+    item = Item.find(params[:item_id])
+    @order = Order.create(order_params) unless current_user.id == item.user.id
   end
 
   def show
@@ -24,6 +27,8 @@ class OrdersController < ApplicationController
       seller_todo   # 出品者
     when @order.user_id
       buyer_todo   # 購入者
+    else
+      redirect_to root_path
     end
   end
 
@@ -31,60 +36,32 @@ class OrdersController < ApplicationController
     order = Order.find(params[:id])
     case order.status
     when "stage0"
-      order.update(status: 1)
+      order.update(status: 1) if current_user.id == order.user_id
     when "stage1"
-      order.update(status: 2)
+      order.update(status: 2) if current_user.id == order.item.user_id
     when "stage2"
-      order.update(status: 3)
+      order.update(status: 3) if current_user.id == order.user_id
     when "stage3"
-      order.update(status: 4)
+      order.update(status: 4) if current_user.id == order.item.user_id
     end
     redirect_to action: :show
   end
 
   def destroy
     order = Order.find(params[:id])
-    order.destroy
-    redirect_to root_path
+    order.destroy if current_user.id == order.user.id
+    redirect_to user_path(current_user)
   end
 
   def sale # 売手から見たオーダーリスト
-    items = Item.where(user_id: current_user.id)
-    items_ids = items.pluck(:id)
-    @orders = Order.where(item_id: items_ids)
+    items_ids = current_user.items.pluck(:id)
+    @orders = Order.where(item_id: items_ids).order("created_at DESC")
   end
 
 
-
-def pay
-  Payjp.api_key = "sk_test_c62fade9d045b54cd76d7036"
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   private
-  def move_to_root
-    redirect_to root_path unless user_signed_in?
+  def move_to_choice
+    redirect_to choice_users_path unless user_signed_in?
   end
 
   def order_params

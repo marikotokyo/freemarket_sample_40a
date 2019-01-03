@@ -4,12 +4,12 @@
       = image_tag (order.item.images.first.image.url), alt: "sample", class: "order-link-img"
     .mypage-order-link__body
       - case controller.action_name
-      - when "index"
-        .order-message
-        「#{order.item.name}」を購入しました。取引中です。
       - when "sale"
         .order-message
           = order.item.name
+      - else
+        .order-message
+          「#{order.item.name}」を購入しました。取引中です。
       .order-status
         取引中
     = fa_icon 'angle-right', class: "order-icon"
