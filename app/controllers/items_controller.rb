@@ -2,9 +2,7 @@ class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
 
   def index
-    @items = Item.includes(:user).limit(8)
-    @images = Image.includes(:item)
-    @image = @images.find(1)
+    @items = Item.includes(:user).order("created_at DESC").limit(8)
   end
 
   def new
