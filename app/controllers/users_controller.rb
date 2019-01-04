@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def show
     user = User.find(show_params[:id])
     @nickname = user.nickname
+    @orders = current_user.orders.order("created_at DESC")
   end
 
   def edit
@@ -58,3 +59,4 @@ class UsersController < ApplicationController
 
 
 end
+

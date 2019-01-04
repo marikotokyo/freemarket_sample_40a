@@ -80,6 +80,13 @@ ja:
         w7: "ゆうパック"
         w8: "クリックポスト"
         w9: "ゆうパケット"
+    order:
+      status:
+        stage0: "購入者の入金待ち"
+        stage1: "出品者の発送待ち"
+        stage2: "到着&購入者の評価待ち"
+        stage3: "出品者の評価待ち"
+        stage4: "取引終了"
   activerecord:
     models:
       item: "商品"

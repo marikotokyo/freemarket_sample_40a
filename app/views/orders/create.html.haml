@@ -1,0 +1,39 @@
+%nav.bread-crumbs
+  %ul
+    %li
+      = link_to items_path, itemprop: 'url', class: "parent" do
+        %span{itemprop: :"title"} メルカリ
+      %i.fas.fa-angle-right
+    %li.item-name
+      %span{itemprop: :"title"} うさぎ
+
+.order-main-container
+  .order-main-container__menu
+    %span ただいま取引中です
+    .order-menu__list
+      状態は
+      = @order.status_i18n
+  .order-main-container__menu
+    %span 商品名
+    .order-menu__list
+      = @order.item.name
+  .order-main-container__menu
+    %span 値段
+    .order-menu__list
+      = @order.item.price
+  .order-main-container__menu
+    %span 出品者
+    .order-menu__list
+      = @order.item.user.nickname
+  .order-main-container__menu
+    %span 購入者
+    .order-menu__list
+      = current_user.nickname
+
+  .order-item__pay-btn
+    .order-item__pay-btn__box
+      =link_to item_order_path(params[:item_id], @order), method: :patch, class: "order-item__pay-btn__box__do" do
+        すぐ入金する
+    .order-item__pay-btn__box
+      =link_to item_order_path(params[:item_id], @order), class: "order-item__pay-btn__box__do" do
+        今すぐはしない

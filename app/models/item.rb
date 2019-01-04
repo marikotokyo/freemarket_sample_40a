@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :user
   belongs_to :size
+  belongs_to :order
   has_many :images
   mount_uploader :image, ImageUploader
   accepts_nested_attributes_for :images
