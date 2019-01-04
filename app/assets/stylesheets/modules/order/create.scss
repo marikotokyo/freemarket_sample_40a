@@ -1,0 +1,38 @@
+.order-main-container {
+  width: 700px;
+  margin: 50px auto;
+  &__menu {
+    background-color: $white;
+    margin-bottom: 2px;
+    text-align: center;
+    line-height: 20px;
+    vertical-align: middle;
+    span {
+      font-weight: bold;
+    }
+    .order-menu__list {
+      font-size: 16px;
+    }
+  }
+  .order-item__pay-btn {
+    &__box {
+      line-height: 50px;
+      vertical-align: middle;
+      background-color: $red;
+      width: 50%;
+      text-align: center;
+      margin: 20px auto;
+      &__do {
+        @include link($white);
+      }
+    }
+    &__message {
+      line-height: 50px;
+      vertical-align: middle;
+      background-color: $slv;
+      width: 50%;
+      text-align: center;
+      margin: 20px auto;
+    }
+  }
+}

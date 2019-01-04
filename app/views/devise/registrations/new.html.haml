@@ -4,7 +4,8 @@
     .flex-parent
       .flex-child-img
         %h1
-          =link_to image_tag("//www-mercari-jp.akamaized.net/assets/img/common/common/logo.svg?3942658967", alt: "mercari"),"https://www.mercari.com/jp/"
+          =link_to root_path, alt: "mercari", class: "devise-img" do
+            = image_tag "//www-mercari-jp.akamaized.net/assets/img/common/common/logo.svg?3942658967"
       .flex-child-prog
         %ul.prog-bar
           %li.prog-unit.now

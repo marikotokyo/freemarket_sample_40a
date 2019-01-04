@@ -77,7 +77,6 @@
       &__process{
         background-color: gray;
         opacity: 0.9;
-        height: 50px;
         width: 270px;
         margin: 10px auto 0;
         margin-bottom: 40px;
@@ -89,6 +88,9 @@
       &__process-msg{
         padding-top: 15px;
         color: white;
+        text-decoration: none;
+        line-height: 50px;
+        vertical-align: middle;
       }
       &__point-msg{
         padding-top: 15px;
@@ -176,6 +178,7 @@
 }
 
 .chanel-img{
+  object-fit: cover;
   width: 130px;
   height: 180px;
   padding-top: 25px;

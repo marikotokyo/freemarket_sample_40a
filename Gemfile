@@ -62,6 +62,8 @@ gem 'enum_help'
 # for reCAPTCHA 2018.12.21 ozaki
   gem 'recaptcha', require: "recaptcha/rails"
 
+  gem 'payjp'
+
 group :production do
   gem 'unicorn'
 end
