@@ -15,21 +15,21 @@
       出品画像
       .require 必須
     %p 最大4枚までアップロードできます
-    .new-upload__image
-      .new-upload__image-dd
-        %pre
-          ドラッグアンドドロップ
-          またはクリックしてファイルをアップロード
-      = f.fields_for :images do |fin|
-        = fin.file_field :image, class: 'hidden', required: true
+    / .new-upload__image
+    /   .new-upload__image-dd
+    /     %pre
+    /       ドラッグアンドドロップ
+    /       またはクリックしてファイルをアップロード
+    /   = f.fields_for :images do |fin|
+    /     = fin.file_field :image, class: 'hidden', required: true
 
-    .new-upload__image
-      .new-upload__image-dd
-        %pre
-          ドラッグアンドドロップ
-          またはクリックしてファイルをアップロード
-      = f.fields_for :images do |fin|
-        = fin.file_field :image, class: 'hidden', required: true
+    / .new-upload__image
+    /   .new-upload__image-dd
+    /     %pre
+    /       ドラッグアンドドロップ
+    /       またはクリックしてファイルをアップロード
+    /   = f.fields_for :images do |fin|
+    /     = fin.file_field :image, class: 'hidden', required: true
 
   .new-itembox
     %span
@@ -51,11 +51,29 @@
           .require
             必須
 
-        = f.collection_select :category, Category.find_by_sql(['select * from categories where depth is NULL']), :id, :name, class: 'select-new', prompt: "---"
+        = f.collection_select :category, Category.where(depth: nil), :id, :name, {selected: @depth[0]},class: 'select-new'
+
+        = f.collection_select :category, Category.where('depth =  ?',@depth[0]), :id, :name, {selected: @depth[1]}, class: 'select-new mcate'
+
+        = f.collection_select :category, Category.where('depth =  ?',@default_category.depth), :id, :name, {selected: @item.category_id}, class: 'select-new scate'
+
+      .new-itembox__right--group.size-box
+        %span
+          サイズ
+          .require
+            必須
+        = f.collection_select :size, Size.where('parent =  ?',@default_size.parent), :id, :name, {selected: @item.size_id}, class: 'select-new size-pd'
 
       .new-itembox__right--group.size-hidden
 
       .new-itembox__right--group.brand-box
+        .form-group.form-suggest-container
+          %label
+            ブランド
+            %span.form-arbitrary
+              任意
+          %div
+            = f.text_field :brand_id, value: @default_brand.name, class: 'input-new',placeholder: "例)シャルル"
 
       .new-itembox__right--group
         %span
@@ -114,27 +132,16 @@
           .price-container__field--left
             %p 販売手数料
           .price-container__field--right
-            %p.commission -
+            %p.commission
+              = commission(@item.price)
         %li.price-container__field
           .price-container__field--left
             %p 販売利益
           .price-container__field--right
-            %p.profits -
+            %p.profits
+              = profit(@item.price)
 
   .new-itembox
-    %p
-      = link_to "禁止されている出品", items_path, class: "heed"
-      、
-      = link_to "行為", items_path, class: "heed"
-      を必ずご確認ください。
-    %p
-      またブランド品でシリアルナンバー等がある場合はご記載ください。
-      = link_to "偽ブランドの販売", items_path, class: "heed"
-      は犯罪であり処罰される可能性があります。
-    %p
-      また、出品をもちまして
-      = link_to "加盟店規約", items_path, class: "heed"
-      に同意したことになります。
-    = f.submit '出品する', class: 'new-itembox__create-btn'
+    = f.submit '変更する', class: 'new-itembox__create-btn'
     = link_to :back, class: "new-submit"do
-      .new-itembox__back-btn もどる
+      .new-itembox__back-btn キャンセル
