@@ -9,3 +9,5 @@ class CardsController < ApplicationController
   def destroy
   end
 end
+
+
