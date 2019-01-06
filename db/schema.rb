@@ -44,9 +44,9 @@ ActiveRecord::Schema.define(version: 20190104120411) do
     t.integer "security_code", null: false
     t.integer "expiration_month", null: false
     t.integer "expriration_year", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_credit_cards_on_user_id"
   end
 

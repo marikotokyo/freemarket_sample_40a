@@ -7,6 +7,9 @@
     %li.item-name
       %span{itemprop: :"title"} うさぎ
 
+.pay-error
+  = h(flash[:notice])
+
 .order-main-container
   .order-main-container__menu
     %span ただいま取引中です
@@ -30,6 +33,13 @@
     .order-menu__list
       = current_user.nickname
 
+  - if @order.status == "stage0"
+    .order-item__pay-btn__box
+      = form_with url: pay_user_order_path(current_user.id, @order), method: :post do |f|
+        %script.payjp-button{"data-key" => "#{PAYJP_PUBLIC_KEY}", "data-partial" => "true", :src => "https://checkout.pay.jp/", :type => "text/javascript"}
+        = f.submit '入金'
+
+
   .order-item__pay-btn
     =link_to item_order_path(params[:item_id],params[:id]), method: :patch, class: "order-item__pay-btn__box__do" do
       .order-item__pay-btn__box
@@ -42,5 +52,5 @@
   .order-item__pay-btn
     =link_to item_order_path(params[:item_id],params[:id]), method: :delete, class: "order-item__pay-btn__box__do" do
       .order-item__pay-btn__box
-        消す
+        = @cancel_message
 
