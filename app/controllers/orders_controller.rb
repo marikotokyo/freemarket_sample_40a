@@ -12,7 +12,6 @@ class OrdersController < ApplicationController
   def new
     @item = Item.find(params[:item_id])
     if current_user != @item.user
-      # binding.pry
       render layout: 'layout_content'
     else
       redirect_to item_path(params[:item_id])
