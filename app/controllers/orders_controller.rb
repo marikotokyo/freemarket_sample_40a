@@ -1,7 +1,7 @@
 require 'payjp'
 
 class OrdersController < ApplicationController
-  Payjp::api_key = 'sk_test_d15896a356388f2608f82ee0'
+  Payjp::api_key = PAYJP_SECRET_KEY
   before_action :move_to_choice
   protect_from_forgery except: :pay
 

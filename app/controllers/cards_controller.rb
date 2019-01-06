@@ -6,8 +6,6 @@ class CardsController < ApplicationController
 
   def new
     @card = CreditCard.new
-    @expire_mm = (01..12).to_a
-    @expire_yy = (19..29).to_a
   end
 
   def create

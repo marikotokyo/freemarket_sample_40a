@@ -32,13 +32,13 @@
             %span.form-require 必須
             %br/
             .select-wrap
-              = f.select :expiration_month, @expire_mm
+              = f.select :expiration_month, (01..12).to_a
 
               %i.fas.fa-angle-down.fa-2x
               .mozi 月
             %ul#expire-mm-error-wrapper.has-error-text
             .select-wrap
-              = f.select :expriration_year, @expire_yy
+              = f.select :expriration_year, (19..29).to_a
 
               %i.fas.fa-angle-down.fa-2x
               .mozi 年
