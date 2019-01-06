@@ -3,8 +3,10 @@ class Item < ApplicationRecord
   belongs_to :user
   belongs_to :size
   belongs_to :order
+  belongs_to :brand
   has_many :images
-  mount_uploader :image, ImageUploader
+  has_many :images, dependent: :destroy
+
   accepts_nested_attributes_for :images
 
   enum condition: [:lv0, :lv1, :lv2, :lv3, :lv4, :lv5, :lv6]
@@ -13,10 +15,10 @@ class Item < ApplicationRecord
   enum shipping_date: [:d0, :d1, :d2, :d3]
   enum shipping_way: [:w0, :w1, :w2, :w3, :w4, :w5, :w6, :w7, :w8, :w9]
 
-  validates :name, presence: true
-  validates :description, presence: true
+  validates :name, presence: true, length: { maximum: 40 }
+  validates :description, presence: true, length: { maximum: 1000 }
   validates :size_id, presence: true
-  validates :price, presence: true, numericality: { only_integer: true }
+  validates :price, presence: true, numericality: { only_integer: true , greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
   validates :condition, presence: true, exclusion: { in: %w(lv0) }
   validates :shipping_from, presence: true, exclusion: { in: %w(noarea) }
   validates :shipping_date, presence: true, exclusion: { in: %w(d0) }

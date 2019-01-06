@@ -23,3 +23,5 @@ class CardsController < ApplicationController
     params.require(:credit_card).permit(:number, :expiration_month, :expriration_year, :security_code).merge(user_id: params[:user_id])
   end
 end
+
+

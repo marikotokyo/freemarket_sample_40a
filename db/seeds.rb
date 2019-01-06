@@ -9,17 +9,17 @@ CSV.read("db/category.csv", headers: false).each do |row|
   )
 end
 
-CSV.read("db/brand.csv", headers: false).each do |row|
-  Brand.create!(
-    id: row[0],
-    name: row[1],
-  )
-end
+# CSV.read("db/brand.csv", headers: false).each do |row|
+#   Brand.create!(
+#     id: row[0],
+#     name: row[1],
+#   )
+# end
 
-CSV.read("db/size.csv", headers: false).each do |row|
-  Size.create!(
-    id: row[0],
-    name: row[1],
-    parent: row[2],
-  )
-end
+# CSV.read("db/size.csv", headers: false).each do |row|
+#   Size.create!(
+#     id: row[0],
+#     name: row[1],
+#     parent: row[2],
+#   )
+# end
