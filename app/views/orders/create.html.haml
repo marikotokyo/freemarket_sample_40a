@@ -33,7 +33,7 @@
   .order-item__pay-btn
     .order-item__pay-btn__box
       = form_with url: pay_user_order_path(current_user.id, @order), method: :post do |f|
-        %script.payjp-button{"data-key" => "pk_test_18f78e0ed8a43a14c9e0825e", "data-partial" => "true", :src => "https://checkout.pay.jp/", :type => "text/javascript"}
+        %script.payjp-button{"data-key" => "#{PAYJP_PUBLIC_KEY}", "data-partial" => "true", :src => "https://checkout.pay.jp/", :type => "text/javascript"}
         = f.submit '入金'
 
     .order-item__pay-btn__box

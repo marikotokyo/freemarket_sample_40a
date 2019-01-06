@@ -64,7 +64,7 @@ class OrdersController < ApplicationController
 
   def pay
     order = Order.find(params[:id])
-    Payjp.api_key = 'sk_test_d15896a356388f2608f82ee0'
+    Payjp.api_key = PAYJP_SECRET_KEY
     begin
       Payjp::Charge.create(
         amount: order.item.price, # 決済する値段
