@@ -123,14 +123,15 @@
   .message-container
     //コメント一覧
     .message-content
-      = render 'comment'
+      = render @comments
     //コメント投稿部分
     .message-content
       %p
         相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
-      %textarea.comment-form{name: :"text", type: :"text", value: :""}
-      %button.comment-btn{type: :submit}
-        コメントする
+      = form_with url: "/items/#{@item.id}/comments" do |f|
+        = f.text_area :text, class: 'comment-form'
+        = f.submit "コメントする", class: 'comment-btn'
+
 
 //ネクストリンク
 .nav-item-link-prev-next
