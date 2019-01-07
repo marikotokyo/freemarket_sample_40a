@@ -119,20 +119,5 @@ $(function() {
       }
     })
 
-    //送信ボタンを押した時に不必要なサイズプルダウンと配送の方法を消去して、サイズのないものにはサイズs0を入れる
-    $('.new-itembox__create-btn').on('click', function() {
-      if ($('#sw-in').css('display') != 'block') {
-        $('#sw-in').remove();
-      }
-      if ($('#sw-out').css('display') != 'block') {
-        $('#sw-out').remove();
-      }
-      if (!($('.size-box').length)) {
-        var nopd = `<select class="select-new" method="post" name="size_id">
-                    <option value="lv0"> --- </option>
-                    </select>`
-        $('.size-hidden').append(pullDown1);
-      }
-    })
   });
 });

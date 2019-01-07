@@ -3,7 +3,6 @@ $(function() {
     $('#sw-in, #sw-out').hide();
     $("select.fee").on('change', function() {
       var val = $(this).val();
-      console.log(val);
       switch(val) {
         case "f0" :
         $('#sw-in').hide();

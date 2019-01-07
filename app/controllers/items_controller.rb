@@ -29,13 +29,15 @@ class ItemsController < ApplicationController
 
   def option
     @item = Item.find(params[:id])
+    @comments = @item.comments
+    @comment = Comment.new
   end
 
   def edit
     @item = Item.find(params[:id])
     @default_category = @item.category
     @default_size = @item.size
-    @default_brand = @item.brand
+    @item.brand == nil ? @default_brand = "" : @default_brand = @item.brand.name
     @depth = @default_category.depth.split("/")
     render layout: 'layout_content'
   end
@@ -58,7 +60,7 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:name, :description, :price, :condition, :category_id, :size_id, :shipping_from, :shipping_date, :shipping_fee, :shipping_way, images_attributes: [:image]).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :description, :price, :condition, :category_id, :size_id, :brand_id, :shipping_from, :shipping_date, :shipping_fee, :shipping_way, images_attributes: [:image]).merge(user_id: current_user.id)
   end
 
   def move_to_index
