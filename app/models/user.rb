@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_one  :credit_card
   has_many :items
   has_many :orders
+  has_many :comments
 
   def self.find_for_oauth(auth)
     snscredential = SnsCredential.where(uid: auth.uid, provider: auth.provider).first

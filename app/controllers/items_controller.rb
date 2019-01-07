@@ -23,6 +23,8 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @comments = @item.comments
+    @comment = Comment.new
   end
 
   def option

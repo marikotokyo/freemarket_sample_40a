@@ -1,0 +1,100 @@
+//コメント表示部分
+.message-content__comments {
+  padding-top: 24px;
+  list-style: none;
+  display: block;
+  margin: 0;
+  .comments-box {
+    @include clearfix();
+    margin: 1.5em 0 0;
+    position: relative;
+    color: $black;
+    .message-user {
+      height: 40px;
+      width: 40px;
+      overflow: hidden;
+      border-radius: 50%;
+      position: relative;
+      top: 10px;
+      color: #333;
+      background-color: $form;
+      .avatar {
+        height: 40px;
+        width: 40px;
+      }
+    }
+    .another-u-avatar {
+      float: left;
+    }
+    .current-u-avatar {
+      float: right;
+    }
+    .message-user-name {
+      height: 16px;
+      margin-bottom: 5px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .another-u-name {
+      padding-left: 60px;
+    }
+    .current-u-name {
+      padding-right: 60px;
+      text-align: right;
+      color: $red;
+    }
+    .message-body {
+      box-sizing: border-box;
+      width: 600px;
+      position: relative;
+      padding: 16px;
+      border-radius: 15px;
+      line-height: 1.5;
+      .text {
+        word-break: break-all;
+        font-size: 14px;
+      }
+      .icons {
+        @include clearfix();
+        margin-top: 8px;
+        .icons-left {
+          float: left;
+          color: #aaa;
+          span {
+            font-size: 14px;
+          }
+        }
+        .icons-right {
+          float: right;
+          color: #aaa;
+          .message-report {
+            text-decoration: none;
+            color: #aaa;
+          }
+        }
+      }
+    }
+    .another-u-body {
+      background: #eef0f4;
+      float: right;
+      .fa-caret-left {
+        position: absolute;
+        top: 8px;
+        left: -9px;
+        color: #eef0f4;
+        font-size: 30px;
+      }
+    }
+    .current-u-body {
+      background-color: #fbf0e6;
+      float: left;
+      .fa-caret-right {
+        position: absolute;
+        top: 8px;
+        right: -9px;
+        color: #fbf0e6;
+        font-size: 30px;
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+- if comment.user == current_user
+  .message-content__comments
+    .comments-box
+      .message-user.current-u-avatar
+        = image_tag "img.jpeg", alt: "sample", class: "avatar"
+      .message-user-name.current-u-name
+        = comment.user.nickname
+      .message-body.current-u-body
+        .text
+          = comment.text
+        .icons
+          .icons-left
+            %i.far.fa-clock
+            %span #{distance_of_time_in_words_to_now(comment.created_at)}
+          .icons-right
+            = link_to items_path, class: "message-report" do
+              %i.fas.fa-flag-checkered
+        %i.fas.fa-caret-right
+
+- else
+  .message-content__comments
+    .comments-box
+      .message-user.another-u-avatar
+        = image_tag "img.jpeg", alt: "sample", class: "avatar"
+      .message-user-name.another-u-name
+        = comment.user.nickname
+      .message-body.another-u-body
+        .text
+          = comment.text
+        .icons
+          .icons-left
+            %i.far.fa-clock
+            %span #{distance_of_time_in_words_to_now(comment.created_at)}
+          .icons-right
+            = link_to items_path, class: "message-report" do
+              %i.fas.fa-flag-checkered
+        %i.fas.fa-caret-left
+

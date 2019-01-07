@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :items do
     get :option, on: :member
     resources :orders, only: [:new, :create, :show, :update, :destroy]
+    resources :comments, only: [:create]
   end
 
   resources :categories do
