@@ -7,9 +7,13 @@ $(document).on('turbolinks:load',function() {
                       <span class = "form-arbitrary">任意</span>
                   </label>
                   <div>
-                    <input class = "input-new
-                    " value placeholder="例）シャネル">
+                    <input class = "incremental-form"  placeholder="例）シャネル" name = "item[brand_name]">
                   </div>
+                </div>
+
+                <div>
+                  <ul class = "incremental-result">
+                  </ul>
                 </div>`
     return html;
   }
@@ -17,6 +21,7 @@ $(document).on('turbolinks:load',function() {
     $(document).on('click','.scate', function() {
       var count_class = $(".form-suggest-container").length;
       if (count_class == 0){
+        $('.incremental-result').remove();
         $('.brand-box').append(buildHTML);
       }
     })

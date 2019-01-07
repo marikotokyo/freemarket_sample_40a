@@ -1,1 +1,10 @@
-カテゴリーidに紐づいた商品一覧が表示される予定です。
+.contents
+  %section.pickup-container
+    %h2.pickup-head
+      = @category.name
+      の商品一覧
+
+    %section.items-box-container-show
+      .items-box-content
+
+        = render @items

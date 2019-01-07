@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :brands do
     get :search, on: :collection
+    get :submit, on: :collection
   end
 
   resources :sizes, only: :index

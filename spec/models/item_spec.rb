@@ -31,6 +31,11 @@ describe Item do
       expect(item.errors[:category_id]).to include("を入力してください")
     end
 
+    it "ブランドが空白でも保存できる" do
+      item = build(:item, brand: nil)
+      expect(item).to be_valid
+    end
+
     it "サイズが空白では保存できない" do
       item = build(:item, size_id: nil)
       item.valid?

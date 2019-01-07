@@ -57,12 +57,13 @@
 
         = f.collection_select :category, Category.where('depth =  ?',@default_category.depth), :id, :name, {selected: @item.category_id}, class: 'select-new scate'
 
-      .new-itembox__right--group.size-box
-        %span
-          サイズ
-          .require
-            必須
-        = f.collection_select :size, Size.where('parent =  ?',@default_size.parent), :id, :name, {selected: @item.size_id}, class: 'select-new size-pd'
+      - if @default_size.id != 0
+        .new-itembox__right--group.size-box
+          %span
+            サイズ
+            .require
+              必須
+          = f.collection_select :size, Size.where('parent =  ?',@default_size.parent), :id, :name, {selected: @item.size_id}, class: 'select-new size-pd'
 
       .new-itembox__right--group.size-hidden
 
@@ -73,7 +74,9 @@
             %span.form-arbitrary
               任意
           %div
-            = f.text_field :brand_id, value: @default_brand.name, class: 'input-new',placeholder: "例)シャルル"
+            = f.text_field :dummy, value: @default_brand, class: 'incremental-form',placeholder: "例)シャルル"
+          %div
+            %ul.incremental-result
 
       .new-itembox__right--group
         %span
