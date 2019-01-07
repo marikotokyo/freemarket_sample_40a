@@ -26,7 +26,7 @@ $(document).on('turbolinks:load',function() {
         $('.size-hidden').append('<input type = "hidden" name = "item[size_id]" value = "0">');
       }
 
-      if (input != false){
+      if (data != null){
         brand_id = data[0].id
         $('.new-header').append('<input type = "hidden" name = "item[brand_id]" value = "' + brand_id +  '">')
         $('form').submit();

@@ -14,7 +14,7 @@ class BrandsController < ApplicationController
   end
 
   def submit
-    @brand = Brand.where('name = ?', "#{params[:keyword]}")
+    @brand = Brand.find_by('name = ?', "#{params[:keyword]}")
     render json: @brand
   end
 
