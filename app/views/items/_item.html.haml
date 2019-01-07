@@ -1,4 +1,4 @@
-%section.items-box
+%section.items-box.show-items
   = link_to item_path(item.id), class: 'item-link' do
     %figure.items-box-photo
       = image_tag (item.images.first.image.url), class: "item-image"

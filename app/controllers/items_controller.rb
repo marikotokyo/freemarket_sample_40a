@@ -23,6 +23,19 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @images = Image.where(item_id: @item.id)
+    @small_category = @item.category
+
+    if @item.category.depth.include?("/")
+      @small_category_depth = @item.category.depth.split("/").last.to_i
+      @medium_category = Category.find(@small_category_depth)
+      @large_category = Category.find(@medium_category.depth)
+    else
+      @medium_cate = Category.find(@item.category_id) #中カテどまりの商品
+      @large_cate = Category.find(@medium_cate.depth)
+    end
+
+    @items = Item.where(user_id: @item.user_id).where.not(id: @item.id).limit(6) # 同じ出品者の商品
   end
 
 
