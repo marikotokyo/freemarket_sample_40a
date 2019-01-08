@@ -1,0 +1,11 @@
+- breadcrumb :searchkeyword, params[:q]
+.contents
+  %section.search-result-container
+    .search-result-head
+      = "検索結果 1-#{@result.length}件"
+
+    %section.items-box-container
+      .items-box-content
+
+        = render @result
+

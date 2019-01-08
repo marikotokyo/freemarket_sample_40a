@@ -6,8 +6,13 @@
           .logo
             = link_to items_path, class: 'logo-link' do
               %img{class: :"mercari", src: "https://www-mercari-jp.akamaized.net/assets/img/common/common/logo.svg?3633094892"}
-          .header-form
-            %input.input-default{ type: "search", name: "keyword", placeholder: "キーワードから探す"}
+          / .header-form
+          /   %input.input-default{ type: "search", name: "keyword", placeholder: "キーワードから探す"}
+          /   %i.fas.fa-search
+          = search_form_for @search, url: search_items_path, class: 'header-form' do |f|
+            / = f.label :name_cont
+            = f.search_field :name_cont, class: 'input-default', placeholder: "キーワードから探す"
+            .actions= f.submit "検索"
             %i.fas.fa-search
 
         .header-nav-box

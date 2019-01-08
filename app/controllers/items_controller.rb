@@ -1,8 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_index, except: [:index, :show, :search]
 
   def index
     @items = Item.includes(:user).order("created_at DESC").limit(8)
+    @search = Item.ransack(params[:q])
   end
 
   def new
@@ -56,6 +57,11 @@ class ItemsController < ApplicationController
       item.update(item_params)
       redirect_to items_path
     end
+  end
+
+  def search
+    @search = Item.ransack(params[:q])
+    @result = @search.result
   end
 
   private
