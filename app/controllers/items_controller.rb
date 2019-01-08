@@ -33,6 +33,14 @@ class ItemsController < ApplicationController
     @comment = Comment.new
   end
 
+  def destroy
+    item = Item.find(params[:id])
+    if item.user_id == current_user.id
+      item.destroy
+      redirect_to items_path
+    end
+  end
+
   def edit
     @item = Item.find(params[:id])
     @default_category = @item.category
@@ -40,14 +48,6 @@ class ItemsController < ApplicationController
     @item.brand == nil ? @default_brand = "" : @default_brand = @item.brand.name
     @depth = @default_category.depth.split("/")
     render layout: 'layout_content'
-  end
-
-  def destroy
-    item = Item.find(params[:id])
-    if item.user_id == current_user.id
-      item.destroy
-      redirect_to items_path
-    end
   end
 
   def update

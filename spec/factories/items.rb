@@ -30,4 +30,9 @@ FactoryGirl.define do
     size
     brand
   end
+
+  factory :image do
+    image "image.jpg"
+    item
+  end
 end
