@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.includes(:user).order("created_at DESC").limit(8)
-    @search = Item.ransack(params[:q])
+    $search = Item.ransack(params[:q])
   end
 
   def new
