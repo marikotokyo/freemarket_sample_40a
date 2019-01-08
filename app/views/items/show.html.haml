@@ -46,21 +46,12 @@
         %tr
           %th カテゴリー
           %td
-            -if @large_category.present?
-              = link_to items_path, class: "top" do
-                = @large_category.name
-            -else
-              = link_to items_path, class: "top" do
-                = @large_cate.name
+            = link_to items_path, class: "top" do
+              = @large_category.name
 
-            -if @medium_category.present?
-              = link_to items_path, class: "middle" do
-                %i.fas.fa-angle-right
-                = @medium_category.name
-            -else
-              = link_to items_path, class: "middle" do
-                %i.fas.fa-angle-right
-                = @medium_cate.name
+            = link_to items_path, class: "middle" do
+              %i.fas.fa-angle-right
+              = @medium_category.name
 
             -if @small_category_depth.present?
               = link_to items_path, class: "bottom" do

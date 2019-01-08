@@ -31,8 +31,8 @@ class ItemsController < ApplicationController
       @medium_category = Category.find(@small_category_depth)
       @large_category = Category.find(@medium_category.depth)
     else
-      @medium_cate = Category.find(@item.category_id) #中カテどまりの商品
-      @large_cate = Category.find(@medium_cate.depth)
+      @medium_category = Category.find(@item.category_id) #中カテどまりの商品
+      @large_category = Category.find(@medium_category.depth)
     end
 
     @items = Item.where(user_id: @item.user_id).where.not(id: @item.id).limit(6) # 同じ出品者の商品
