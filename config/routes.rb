@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     end
   end
   resources :items do
+    get :search, on: :collection
     get :option, on: :member
     resources :orders, only: [:new, :create, :show, :update, :destroy]
     resources :comments, only: [:create]

@@ -23,3 +23,7 @@ crumb :category do |category|
   link "#{category.name}", category_path(params[:id])
   parent :categories
 end
+
+crumb :searchkeyword do |keyword|
+  link "#{keyword[:name_cont]}"
+end

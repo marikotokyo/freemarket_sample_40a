@@ -66,6 +66,8 @@ gem 'enum_help'
 
   gem 'gretel'
 
+  gem 'ransack'
+
 group :production do
   gem 'unicorn'
 end
