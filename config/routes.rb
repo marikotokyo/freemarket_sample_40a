@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'items#index'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   resources :users do
     get :choice, on: :collection
     post :follow, on: :member
@@ -14,11 +15,19 @@ Rails.application.routes.draw do
     end
   end
   resources :items do
+    get :option, on: :member
     resources :orders, only: [:new, :create, :show, :update, :destroy]
+    resources :comments, only: [:create]
   end
+
   resources :categories do
     get :select_top, on: :collection
     get :select_mid, on: :collection
   end
+
+  resources :brands do
+    get :search, on: :collection
+  end
+
   resources :sizes, only: :index
 end

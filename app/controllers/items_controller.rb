@@ -36,8 +36,38 @@ class ItemsController < ApplicationController
     end
 
     @items = Item.where(user_id: @item.user_id).where.not(id: @item.id).limit(6) # 同じ出品者の商品
+    @comments = @item.comments
+    @comment = Comment.new
   end
 
+  def option
+    @item = Item.find(params[:id])
+  end
+
+  def edit
+    @item = Item.find(params[:id])
+    @default_category = @item.category
+    @default_size = @item.size
+    @default_brand = @item.brand
+    @depth = @default_category.depth.split("/")
+    render layout: 'layout_content'
+  end
+
+  def destroy
+    item = Item.find(params[:id])
+    if item.user_id == current_user.id
+      item.destroy
+      redirect_to items_path
+    end
+  end
+
+  def update
+    item = Item.find(params[:id])
+    if item.user_id == current_user.id
+      item.update(item_params)
+      redirect_to items_path
+    end
+  end
 
   private
   def item_params

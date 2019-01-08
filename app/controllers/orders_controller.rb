@@ -1,5 +1,9 @@
+require 'payjp'
+
 class OrdersController < ApplicationController
+  Payjp::api_key = PAYJP_SECRET_KEY
   before_action :move_to_choice
+  protect_from_forgery except: :pay
 
   def index # 買手から見たオーダーリスト
     @orders = current_user.orders.order("created_at DESC")
@@ -58,6 +62,56 @@ class OrdersController < ApplicationController
     @orders = Order.where(item_id: items_ids).order("created_at DESC")
   end
 
+  def pay
+    order = Order.find(params[:id])
+    Payjp.api_key = PAYJP_SECRET_KEY
+    begin
+      Payjp::Charge.create(
+        amount: order.item.price, # 決済する値段
+        card: params['payjp-token'],
+        currency: 'jpy'
+      )
+      order.update(status: 1) if current_user.id == order.user_id
+      redirect_to item_order_path(order)
+    rescue => e
+      redirect_to item_order_path(order)
+      flash[:notice] = "カードエラーが起きました、再度手続きを行ってください。"
+    end
+
+    # number = current_user.credit_card.number
+    # cvc = current_user.credit_card.security_code
+    # exp_month = current_user.credit_card.expiration_month
+    # exp_year = current_user.credit_card.expriration_year
+
+    # token = Payjp::Token.create(
+    #   card: {
+    #   number:    number,
+    #   cvc:       cvc,
+    #   exp_year:  exp_year,
+    #   exp_month: exp_month,
+    #   }
+    # )
+  end
+
+  # def self.create_token(number, cvc, exp_month, exp_year)
+  #   token = Payjp::Token.create(
+  #     card: {
+  #     number:    number,
+  #     cvc:       cvc,
+  #     exp_year:  exp_year,
+  #     exp_month: exp_month,
+  #     }
+  #   )
+  #   return token.id
+  # end
+
+  # def self.create_charge_by_token(token, amount)
+  #   Payjp::Charge.create(
+  #     amount:   amount,
+  #     card:     token,
+  #     currency: 'jpy'
+  #   )
+  # end
 
   private
   def move_to_choice
@@ -86,7 +140,8 @@ class OrdersController < ApplicationController
   def buyer_todo
     case @order.status
     when "stage0"
-      @btn = "入金する"
+      @message = "入金してください"
+      @cancel_message = "キャンセルする"
     when "stage1"
       @message = "商品の発送をお待ちください"
     when "stage2"
