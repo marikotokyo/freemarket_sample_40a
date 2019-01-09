@@ -32,4 +32,5 @@ Rails.application.routes.draw do
   end
 
   resources :sizes, only: :index
+  resources :addresses, only: [:new, :create, :edit, :update]
 end

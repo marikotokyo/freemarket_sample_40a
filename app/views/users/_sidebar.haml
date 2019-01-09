@@ -54,7 +54,7 @@
           ガイド
           %i.far.fa-angle-rig.fa-lg
       %li
-        = link_to "", class: "mypage-nav-list-item" do
+        = link_to new_address_path, class: "mypage-nav-list-item" do
           お問い合わせ
           %i.far.fa-angle-rig.fa-lg
   %h3.mypage-nav-head
@@ -76,7 +76,7 @@
         プロフィール
         %i.far.fa-angle-rig.fa-lg
     %li
-      = link_to "", class: "mypage-nav-list-item" do
+      = link_to edit_address_path(current_user.address.id), class: "mypage-nav-list-item" do
         住所変更
         %i.far.fa-angle-rig.fa-lg
     %li

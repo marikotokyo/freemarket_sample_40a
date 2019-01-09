@@ -1,0 +1,80 @@
+%main.l-container
+  = render "users/sidebar"
+  .l-content
+    %section.l-chapter-container.mypage-identification
+      %h2.l-chapter-head
+        本人情報の登録
+      %p.text-center
+        お客さまのあんしん・あんぜんな取引のため、本人情報のご登録をお願いしております。
+      = form_for @address, html: {class: "l-single-inner"} do |f|
+        .form-group
+          = f.label "お名前"
+          %span.form-require
+            必須
+          = f.text_field :family_name, placeholder: "例）山田", class: "input-default"
+          = f.text_field :first_name, placeholder: "例）彩", class: "input-default"
+        .form-group
+          = f.label "お名前カナ"
+          %span.form-require
+            必須
+          = f.text_field :family_name_kana, placeholder: "例）ヤマダ", class: "input-default"
+          = f.text_field :first_name_kana, placeholder: "例）アヤ", class: "input-default"
+        .form-group
+          = f.label :postal_code, "郵便番号"
+          %span.form-arbitrary
+            任意
+          = f.text_field :postal_code, placeholder: "例）1234567", class: "input-default"
+        .form-group
+          = f.label :prefecture, "都道府県"
+          %span.form-require
+            必須
+          .select-wrap-pre
+            = f.select :prefecture, Item.shipping_froms_i18n.invert, {}, {class: "input-default"}
+            %i.fas.fa-angle-down.fa-lg
+        .form-group
+          = f.label :city, "市区町村"
+          %span.form-require
+            必須
+          = f.text_field :city, placeholder: "例）横浜市緑区", class: "input-default"
+        .form-group
+          = f.label :street_number, "番地"
+          %span.form-require
+            必須
+          = f.text_field :street_number, placeholder: "例）青山1−1−1", class: "input-default"
+        .form-group
+          = f.label :building_name, "建物名"
+          %span.form-arbitrary
+            任意
+          = f.text_field :building_name, placeholder: "例）柳ビル103", class: "input-default"
+        .form-group
+          = f.label "生年月日"
+          %span.form-require
+            必須
+          .birth-form
+            .birthday-select-wrap
+              .select-wrap
+                = f.select :birth_year, @year,{}, {class: "input-default"}
+              %i.fas.fa-angle-down.fa-lg
+            %span
+              年
+            .birthday-select-wrap
+              .select-wrap.select-wrap__month
+                = f.select :birth_month, @month, {}, {class: "input-default"}
+              %i.fas.fa-angle-down.fa-lg
+            %span
+              月
+            .birthday-select-wrap
+              .select-wrap.select-wrap__day
+                = f.select :birth_day, @day, {}, {class: "input-default"}
+              %i.fas.fa-angle-down.fa-lg
+            %span
+              日
+          %p.form-info-text
+            ※出品されたことがある、本人情報未登録のお客さまもご対象となります。
+
+          = f.submit "登録する", class: "id-btn-default id-btn-red"
+          .form-group.text-right
+            %p
+              =link_to "https://www.mercari.com/jp/help_center/article/423/" do
+                本人情報の登録について
+                %i.fas.fa-angle-right.fa-lg
