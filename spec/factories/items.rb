@@ -1,12 +1,16 @@
 FactoryGirl.define do
 
-  factory :category, class: Category do
+  factory :category do
     name { Faker::Name.name }
     depth "2"
     size_pulldown "1"
   end
 
-  factory :size, class: Size do
+  factory :brand do
+    name "アディダス"
+  end
+
+  factory :size do
     name "s"
     parent "1"
   end
@@ -24,5 +28,11 @@ FactoryGirl.define do
     user
     category
     size
+    brand
+  end
+
+  factory :image do
+    image "image.jpg"
+    item
   end
 end

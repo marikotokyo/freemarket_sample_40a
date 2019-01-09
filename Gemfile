@@ -65,6 +65,10 @@ gem 'enum_help'
   gem 'payjp'
   gem 'gon'
 
+  gem 'gretel'
+
+  gem 'ransack'
+
 group :production do
   gem 'unicorn'
 end

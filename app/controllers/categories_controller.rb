@@ -16,6 +16,23 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def show
+    @category = Category.find(params[:id])
+    depth_id = @category.depth
+
+    if depth_id == nil
+      @categories = Category.where('depth LIKE(?)', "#{params[:id]}/%")
+      @categories = @categories.map { |category| category.id.to_s }
+      @items = Item.where(category_id: [@categories])
+    elsif depth_id =~ /^[0-9]+$/
+      @categories = Category.where('depth LIKE(?)', "%/#{params[:id]}")
+      @categories = @categories.map { |category| category.id.to_s }
+      @items = Item.where(category_id: [@categories])
+    else
+      @items = Item.where(category_id: params[:id])
+    end
+  end
+
   def select_top
     respond_to do |format|
       format.json{ @m_cate = Category.where('depth = ?', "#{params[:id]}")} if params[:id].present?

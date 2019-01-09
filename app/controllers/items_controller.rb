@@ -1,8 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_index, except: [:index, :show, :search]
 
   def index
     @items = Item.includes(:user).order("created_at DESC").limit(8)
+    $search = Item.ransack(params[:q])
   end
 
   def new
@@ -24,21 +25,27 @@ class ItemsController < ApplicationController
   def show
     gon.address = current_user.address.present?
     @item = Item.find(params[:id])
+    @images = Image.where(item_id: @item.id)
+    @small_category = @item.category
+
+    if @item.category.depth.include?("/")
+      @small_category_depth = @item.category.depth.split("/").last.to_i
+      @medium_category = Category.find(@small_category_depth)
+      @large_category = Category.find(@medium_category.depth)
+    else
+      @medium_category = Category.find(@item.category_id) #中カテどまりの商品
+      @large_category = Category.find(@medium_category.depth)
+    end
+
+    @items = Item.where(user_id: @item.user_id).where.not(id: @item.id).limit(6) # 同じ出品者の商品
     @comments = @item.comments
     @comment = Comment.new
   end
 
   def option
     @item = Item.find(params[:id])
-  end
-
-  def edit
-    @item = Item.find(params[:id])
-    @default_category = @item.category
-    @default_size = @item.size
-    @default_brand = @item.brand
-    @depth = @default_category.depth.split("/")
-    render layout: 'layout_content'
+    @comments = @item.comments
+    @comment = Comment.new
   end
 
   def destroy
@@ -49,6 +56,15 @@ class ItemsController < ApplicationController
     end
   end
 
+  def edit
+    @item = Item.find(params[:id])
+    @default_category = @item.category
+    @default_size = @item.size
+    @item.brand == nil ? @default_brand = "" : @default_brand = @item.brand.name
+    @depth = @default_category.depth.split("/")
+    render layout: 'layout_content'
+  end
+
   def update
     item = Item.find(params[:id])
     if item.user_id == current_user.id
@@ -57,9 +73,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def search
+    @search = Item.ransack(params[:q])
+    @result = @search.result
+  end
+
   private
   def item_params
-    params.require(:item).permit(:name, :description, :price, :condition, :category_id, :size_id, :shipping_from, :shipping_date, :shipping_fee, :shipping_way, images_attributes: [:image]).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :description, :price, :condition, :category_id, :size_id, :brand_id, :shipping_from, :shipping_date, :shipping_fee, :shipping_way, images_attributes: [:image]).merge(user_id: current_user.id)
   end
 
   def move_to_index

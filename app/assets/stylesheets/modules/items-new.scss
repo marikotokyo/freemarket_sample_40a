@@ -23,6 +23,36 @@
   }
 }
 
+.incremental{
+  &-form{
+    outline: 0;
+    background: #fff;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    line-height: 1.5;
+    margin-top: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 48px;
+    border-radius: 4px;
+    padding: 10px 16px 8px;
+  }
+  &-result{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: auto;
+    z-index: 10;
+    max-height: 280px;
+    background: #fff;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.64);
+    li{
+      padding: 16px 8px;
+      font-size: 14px;
+    }
+  }
+}
+
 .new-upload {
   @include items-new();
   padding: 40px;

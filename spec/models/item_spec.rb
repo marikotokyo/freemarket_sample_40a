@@ -2,16 +2,16 @@ require 'rails_helper'
 describe Item do
   describe '#create' do
 
-    # it "必須項目が全てあれば保存できる" do
-    #   user = build(:user)
-    #   expect(user).to be_valid
-    # end
+    it "必須項目が全てあれば保存できる" do
+      user = build(:user)
+      expect(user).to be_valid
+    end
 
-    # it "出品画像がが空白では保存できない" do
-    #   item = build(:item, name: nil)
-    #   item.valid?
-    #   expect(item.errors[:name]).to include("を入力してください")
-    # end
+    it "出品画像が空白では保存できない" do
+      image = build(:image, image: nil)
+      image.valid?
+      expect(image.errors[:image]).to include("を入力してください")
+    end
 
     it "商品名が空白では保存できない" do
       item = build(:item, name: nil)
@@ -29,6 +29,11 @@ describe Item do
       item = build(:item, category_id: nil)
       item.valid?
       expect(item.errors[:category_id]).to include("を入力してください")
+    end
+
+    it "ブランドが空白でも保存できる" do
+      item = build(:item, brand: nil)
+      expect(item).to be_valid
     end
 
     it "サイズが空白では保存できない" do
