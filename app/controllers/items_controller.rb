@@ -3,6 +3,8 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.includes(:user).order("created_at DESC").limit(8)
+    # ids = Order.pluck(:item_id)
+    # @items = items.where.not(id: ids)
     $search = Item.ransack(params[:q])
   end
 
@@ -24,6 +26,7 @@ class ItemsController < ApplicationController
 
   def show
     gon.address = current_user.address.present?
+    @ids = Order.pluck(:item_id)
     @item = Item.find(params[:id])
     @images = Image.where(item_id: @item.id)
     @small_category = @item.category

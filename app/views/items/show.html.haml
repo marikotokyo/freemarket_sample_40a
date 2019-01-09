@@ -85,18 +85,20 @@
   .item-price-box
     %span.price="¥" + number_with_delimiter("#{@item.price}")
     %span.tax （税込）
-    %span.shipping-fee 送料込み
-
+    %span.shipping-fee="#{@item.shipping_fee_i18n}"
 
     = Gon::Base.render_data
 
-    %span.shipping-fee="#{@item.shipping_fee_i18n}"
-
-  - if user_signed_in?
-    -unless current_user.id == @item.user_id
-      .item-buy-btn
-        = link_to new_item_order_path(params[:id]), class: "buy-red" do
-          購入画面に進む
+  - case @item.id
+  - when *@ids
+    .item-buy-btn.no-click#not-click
+      売り切れました
+  -else
+    - if user_signed_in?
+      -unless current_user.id == @item.user_id
+        .item-buy-btn
+          = link_to new_item_order_path(params[:id]), class: "buy-red" do
+            購入画面に進む
 
   .item-description
     %p.item-description-inner
@@ -127,7 +129,12 @@
         相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
       = form_with url: "/items/#{@item.id}/comments" do |f|
         = f.text_area :text, class: 'comment-form'
-        = f.submit "コメントする", class: 'comment-btn'
+        - case @item.id
+        - when *@ids
+          .not-comment#not-click
+            売り切れのためコメントできません
+        -else
+          = f.submit "コメントする", class: 'comment-btn'
 
 
 //ネクストリンク
