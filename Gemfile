@@ -63,6 +63,7 @@ gem 'enum_help'
   gem 'recaptcha', require: "recaptcha/rails"
 
   gem 'payjp'
+  gem 'gon'
 
   gem 'gretel'
 

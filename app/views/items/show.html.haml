@@ -85,6 +85,11 @@
   .item-price-box
     %span.price="¥" + number_with_delimiter("#{@item.price}")
     %span.tax （税込）
+    %span.shipping-fee 送料込み
+
+
+  = Gon::Base.render_data
+  
     %span.shipping-fee="#{@item.shipping_fee_i18n}"
 
   - if user_signed_in?

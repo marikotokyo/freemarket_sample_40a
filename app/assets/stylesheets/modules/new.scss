@@ -71,18 +71,25 @@
       }
       &__error-text{
         font-size: 12px;
-        color: red;
+        color: $red;
         padding-top: 25px;
       }
       &__process{
         background-color: gray;
         opacity: 0.9;
-        width: 270px;
         margin: 10px auto 0;
         margin-bottom: 40px;
+        width: 270px;
+        &-red {
+          margin: 40px auto;
+          background-color: $red;
+          line-height: 50px;
+          width: 270px;
+          text-decoration: none;
+        }
       }
       &__image{
-          background-color: white;
+          background-color: $white;
           text-align: center;
       }
       &__process-msg{
@@ -94,19 +101,20 @@
       }
       &__point-msg{
         padding-top: 15px;
+        width: 270px;
       }
     }
   }
   &-user-info{
-    background-color: white;
+    background-color: $white;
     border-bottom: solid 2px;
     border-color: rgb(245,245,245);
     text-align: left;
     padding-top: 3px;
     &__inner{
-      height: 90px;
       width: 350px;
       margin: 10px auto 20px;
+      @include clearfix();
       &__msg{
         font-size: 13px;
         font-weight: bold;
@@ -126,10 +134,11 @@
       }
       &__fix{
         font-size: 12px;
-        color: blue;
+        @include link($blue);
         float: right;
         opacity: 0.7;
         padding-top: 20px;
+        font-weight: bold;
       }
     }
   }
@@ -149,34 +158,39 @@
     float: right;
   }
   &-options{
-    background-color: white;
+    background-color: $white;
     padding-top: 3px;
     border-top: solid 2px;
     border-color: rgb(245,245,245);
     &__inner{
-      height: 60px;
       width: 350px;
-      margin: 10px auto 15px;
+      margin: 15px auto 15px;
+      @include clearfix();
       &__msg{
         font-size: 13px;
         font-weight: bold;
-        padding-bottom: 5px;
       }
       &__name{
-        font-size: 13px;
-        padding-top: 20px;
+        font-size: 12px;
+        padding-top: 10px;
       }
       &__fix{
         font-size: 12px;
-        color: blue;
+        font-weight: bold;
         float: right;
         opacity: 0.7;
         padding-top: 20px;
+        @include link($blue);
       }
     }
   }
 }
 
+.take-commit {
+  width: 270px;
+  line-height: 50px;
+  color: $white;
+}
 .chanel-img{
   object-fit: cover;
   width: 130px;

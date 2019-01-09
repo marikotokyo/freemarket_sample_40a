@@ -32,10 +32,11 @@
 
   .order-item__pay-btn
     .order-item__pay-btn__box
-      = form_with url: pay_user_order_path(current_user.id, @order), method: :post do |f|
-        %script.payjp-button{"data-key" => "#{PAYJP_PUBLIC_KEY}", "data-partial" => "true", :src => "https://checkout.pay.jp/", :type => "text/javascript"}
-        = f.submit '入金'
+      .order-item__pay-btn__box-paypay
+        登録されているカードで支払う
 
     .order-item__pay-btn__box
-      = link_to item_order_path(params[:item_id], @order), class: "order-item__pay-btn__box__do" do
+      = link_to item_order_path(params[:item_id], @order), class: "order-item__pay-btn__box__do", id: 'order-show-go' do
         今すぐはしない
+
+  = render 'pay'

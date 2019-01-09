@@ -23,6 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    gon.address = current_user.address.present?
     @item = Item.find(params[:id])
     @images = Image.where(item_id: @item.id)
     @small_category = @item.category

@@ -1,0 +1,8 @@
+%script{:src => "https://js.pay.jp/", :type => "text/javascript"}
+= Gon::Base.render_data
+.order-card-form
+  = form_with url: pay_user_order_path(current_user.id, @order), method: :post, id: 'paycard', type: 'hidden' do |f|
+    = f.hidden_field :number, class: 'pay-num', placeholder: 'type a message', value: "#{current_user.credit_card.number}"
+    = f.hidden_field :cvc, class: 'pay-cvc', placeholder: 'type a message', value: "#{current_user.credit_card.security_code}"
+    = f.hidden_field :exp_month, class: 'pay-exp-m', placeholder: 'type a message', value: "#{current_user.credit_card.expiration_month}"
+    = f.hidden_field :exp_year, class: 'pay-exp-y', placeholder: 'type a message', value: "#{current_user.credit_card.expriration_year}"
