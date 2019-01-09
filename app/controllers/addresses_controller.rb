@@ -1,4 +1,5 @@
 class AddressesController < ApplicationController
+  before_action :move_to_index
 
   def new
     @address = Address.new
@@ -29,5 +30,9 @@ class AddressesController < ApplicationController
   private
   def address_params
     params.require(:address).permit(:family_name, :first_name, :family_name_kana, :first_name_kana, :postal_code, :prefecture, :city, :street_number, :building_name, :birth_year, :birth_month, :birth_day).merge(user_id: current_user.id)
+  end
+
+  def move_to_index
+    redirect_to items_path unless user_signed_in?
   end
 end
