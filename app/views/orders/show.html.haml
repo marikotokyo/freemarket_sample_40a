@@ -31,7 +31,7 @@
   .order-main-container__menu
     %span 購入者
     .order-menu__list
-      = current_user.nickname
+      = @order.user.nickname
 
   .order-item__pay-btn
     .order-item__pay-btn__box
