@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     get :logout, on: :member
     get :edit, on: :member
     get :identification, on: :member
-    resources :cards, :only => [:index, :new, :create, :destroy]
+    resources :cards, :only => [:index, :new, :create]
     resources :orders, only: :index do
       get :sale, on: :collection
       post :pay, on: :member
@@ -33,4 +33,5 @@ Rails.application.routes.draw do
 
   resources :sizes, only: :index
   resources :addresses, only: [:new, :create, :edit, :update]
+  resources :cards, only: :destroy
 end
