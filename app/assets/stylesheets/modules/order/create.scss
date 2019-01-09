@@ -22,8 +22,12 @@
       width: 50%;
       text-align: center;
       margin: 20px auto;
+      cursor: pointer;
       &__do {
         @include link($white);
+      }
+      &-paypay {
+        color: $white;
       }
     }
     &__message {

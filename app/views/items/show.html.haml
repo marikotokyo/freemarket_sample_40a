@@ -102,6 +102,8 @@
     %span.price ￥14,500
     %span.tax （税込）
     %span.shipping-fee 送料込み
+
+  = Gon::Base.render_data
   .item-buy-btn
     = link_to new_item_order_path(params[:id]), class: "buy-red" do
       購入画面に進む

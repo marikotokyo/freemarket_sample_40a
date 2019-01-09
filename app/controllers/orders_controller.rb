@@ -3,6 +3,7 @@ require 'payjp'
 class OrdersController < ApplicationController
   Payjp::api_key = PAYJP_SECRET_KEY
   before_action :move_to_choice
+  before_action :require_order_new, only: [:new, :create]
   protect_from_forgery except: :pay
 
   def index # 買手から見たオーダーリスト
@@ -11,6 +12,7 @@ class OrdersController < ApplicationController
 
   def new
     @item = Item.find(params[:item_id])
+    @image = @item.images.first.image.url
     if current_user != @item.user
       render layout: 'layout_content'
     else
@@ -19,11 +21,13 @@ class OrdersController < ApplicationController
   end
 
   def create
+    gon.key = PAYJP_PUBLIC_KEY
     item = Item.find(params[:item_id])
     @order = Order.create(order_params) unless current_user.id == item.user.id
   end
 
   def show
+    gon.key = PAYJP_PUBLIC_KEY
     @order = Order.find(params[:id])
     # 売り手と買い手の画面分岐
     case current_user.id
@@ -65,57 +69,33 @@ class OrdersController < ApplicationController
   def pay
     order = Order.find(params[:id])
     Payjp.api_key = PAYJP_SECRET_KEY
+
     begin
       Payjp::Charge.create(
         amount: order.item.price, # 決済する値段
-        card: params['payjp-token'],
+        card: params[:payjp_token], # ajaxで送られてきたトークン
         currency: 'jpy'
       )
-      order.update(status: 1) if current_user.id == order.user_id
+      order.update(status: 1) if current_user.id == order.user_id # ステータスの更新
+      respond_to do |format|
+        format.json
+      end
       redirect_to item_order_path(order)
     rescue => e
       redirect_to item_order_path(order)
       flash[:notice] = "カードエラーが起きました、再度手続きを行ってください。"
     end
 
-    # number = current_user.credit_card.number
-    # cvc = current_user.credit_card.security_code
-    # exp_month = current_user.credit_card.expiration_month
-    # exp_year = current_user.credit_card.expriration_year
-
-    # token = Payjp::Token.create(
-    #   card: {
-    #   number:    number,
-    #   cvc:       cvc,
-    #   exp_year:  exp_year,
-    #   exp_month: exp_month,
-    #   }
-    # )
   end
 
-  # def self.create_token(number, cvc, exp_month, exp_year)
-  #   token = Payjp::Token.create(
-  #     card: {
-  #     number:    number,
-  #     cvc:       cvc,
-  #     exp_year:  exp_year,
-  #     exp_month: exp_month,
-  #     }
-  #   )
-  #   return token.id
-  # end
-
-  # def self.create_charge_by_token(token, amount)
-  #   Payjp::Charge.create(
-  #     amount:   amount,
-  #     card:     token,
-  #     currency: 'jpy'
-  #   )
-  # end
 
   private
   def move_to_choice
     redirect_to choice_users_path unless user_signed_in?
+  end
+
+  def require_order_new
+    redirect_to item_path(params[:item_id]) unless current_user.address
   end
 
   def order_params
@@ -140,7 +120,7 @@ class OrdersController < ApplicationController
   def buyer_todo
     case @order.status
     when "stage0"
-      @message = "入金してください"
+      @paybtn = "登録しているカードで支払う"
       @cancel_message = "キャンセルする"
     when "stage1"
       @message = "商品の発送をお待ちください"

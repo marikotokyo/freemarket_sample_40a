@@ -3,7 +3,7 @@
     .c-single-main__head__text 購入を確定しますか？
   .buy-content
     .buy-main-content__image
-      = image_tag "img.jpeg", alt: "sample", class: "chanel-img"
+      = image_tag (@image), alt: "sample", class: "chanel-img"
       .buy-main-content
         .buy-main-content__name
           = @item.name
@@ -19,10 +19,16 @@
             %li.payment-msg 支払い金額
             %li.payment-price
               = @item.price
-        .buy-main-content__error-text 配送先と支払い方法の入力を完了してください
-        .buy-main-content__process
-          = link_to item_orders_path(params[:item_id]),method: :post, class: "buy-main-content__process-msg" do
-            購入する
+        - if current_user.credit_card.present?
+          .buy-main-content__process-red
+            = link_to item_orders_path(params[:item_id]),method: :post, class: "buy-main-content__process-msg" do
+              .take-commit
+                購入する
+        - else
+          .buy-main-content__error-text 配送先と支払い方法の入力を完了してください
+          .buy-main-content__process
+            .take-commit#not-click
+              購入する
       .buy-user-info
         .buy-user-info__inner
           .buy-user-info__inner__msg 配送先
@@ -30,11 +36,20 @@
           .buy-user-info__inner__address 東京都渋谷区道玄坂1-1-1
           .buy-user-info__inner__name
             = current_user.nickname
-          = link_to do
-            .buy-user-info__inner__fix 変更する >
+          =link_to new_user_card_path(current_user), class: 'buy-user-info__inner__fix' do
+            変更する >
+
         .payment-options
           .payment-options__inner
-            .payment-options__inner__msg 支払い方法 /
+            .payment-options__inner__msg
+              支払い方法
             .payment-options__inner__name
-            =link_to do
-              .payment-options__inner__fix 変更する >
+              .card-num-box
+                - if current_user.credit_card.present?
+                  ************#{current_user.credit_card.number.match(/\d{4}$/)}
+                  %br/
+                  #{current_user.credit_card.expiration_month}/#{current_user.credit_card.expriration_year.to_s.match(/\d{2}$/)}
+                - else
+                  &frasl;
+            =link_to new_user_card_path(current_user), class: 'payment-options__inner__fix' do
+              変更する >

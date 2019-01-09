@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    gon.address = current_user.address.present?
     @item = Item.find(params[:id])
     @comments = @item.comments
     @comment = Comment.new
