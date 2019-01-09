@@ -22,7 +22,7 @@ $(function() {
     var num = $('.pay-num').val();
     var cvc = $('.pay-cvc').val();
     var exp_m = $('.pay-exp-m').val();
-    var exp_y = $('.pay-exp-y').val();
+    var exp_y = "20" + $('.pay-exp-y').val();
 
     var card = {
       number: num,
