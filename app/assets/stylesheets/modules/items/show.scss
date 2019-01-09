@@ -205,6 +205,12 @@
       color: $white;
     }
   }
+  .no-click {
+    background-color: gray;
+    font-weight: bold;
+    font-size: 24px;
+    color: $white;
+  }
 
   .item-description {
     padding-top: 32px;
@@ -271,6 +277,15 @@
         border: 1px solid $slv;
         font-size: 16px;
         line-height: 1.5;
+      }
+      .not-comment {
+        width: 100%;
+        margin-top: 8px;
+        line-height: 48px;
+        color: $white;
+        vertical-align: middle;
+        background: gray;
+        text-align: center;
       }
       .comment-btn {
         width: 100%;
