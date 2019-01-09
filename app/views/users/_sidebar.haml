@@ -75,10 +75,18 @@
       = link_to edit_user_path(current_user.id), class: "mypage-nav-list-item" do
         プロフィール
         %i.far.fa-angle-rig.fa-lg
-    %li
-      = link_to edit_address_path(current_user.address.id), class: "mypage-nav-list-item" do
-        住所変更
-        %i.far.fa-angle-rig.fa-lg
+
+    - if current_user.address.present?
+      %li
+        = link_to edit_address_path(current_user.address.id), class: "mypage-nav-list-item" do
+          住所変更
+          %i.far.fa-angle-rig.fa-lg
+    -else
+      %li
+        = link_to "", class: "mypage-nav-list-item" do
+          住所変更
+          %i.far.fa-angle-rig.fa-lg
+
     %li
       = link_to user_cards_path(current_user), class: "mypage-nav-list-item" do
         支払い方法

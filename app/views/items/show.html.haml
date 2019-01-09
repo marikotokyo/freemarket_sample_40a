@@ -88,8 +88,8 @@
     %span.shipping-fee 送料込み
 
 
-  = Gon::Base.render_data
-  
+    = Gon::Base.render_data
+
     %span.shipping-fee="#{@item.shipping_fee_i18n}"
 
   - if user_signed_in?
