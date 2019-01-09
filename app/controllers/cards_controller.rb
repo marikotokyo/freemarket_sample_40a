@@ -14,6 +14,8 @@ class CardsController < ApplicationController
   end
 
   def destroy
+    current_user.credit_card.destroy
+    redirect_to user_cards_path(current_user.id)
   end
 
   private
